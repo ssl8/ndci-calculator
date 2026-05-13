@@ -32,7 +32,12 @@ import numpy as np
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.normpath(os.path.join(HERE, "..", "..", "data", "ndci-matrix.json"))
+# Prefer the bundled copy (standalone clone); fall back to the
+# parent-site path so the script also works in-place inside the
+# buraksuslu.com working tree at engineering/ndci-calculator/.
+_BUNDLED = os.path.join(HERE, "data", "ndci-matrix.json")
+_PARENT = os.path.normpath(os.path.join(HERE, "..", "..", "data", "ndci-matrix.json"))
+DATA = _BUNDLED if os.path.exists(_BUNDLED) else _PARENT
 
 
 # ── NDCI core ────────────────────────────────────────────────────────────
